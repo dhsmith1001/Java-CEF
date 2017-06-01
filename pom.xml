@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.lespea</groupId>
 	<artifactId>cef</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>common-event-format</name>
 	<description>Library to work with the common event format</description>
 	<properties>
@@ -20,21 +20,19 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
+			<version>1.7.9</version>
 		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>0.9.29</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>6.1.1</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>1.2.3</version>
+        </dependency>
+        <dependency>
+          <groupId>org.testng</groupId>
+          <artifactId>testng</artifactId>
+          <version>6.9.9</version>
+        </dependency>
+    </dependencies>
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -68,4 +66,51 @@
 		<developerConnection>scm:git:git://github.com/lespea/Java-CEF.git</developerConnection>
 	</scm>
 	<url>https://github.com/lespea/Java-CEF</url>
+
+    <!-- Nexus server(s) for publishing snapshots & releases -->
+    <distributionManagement>
+        <!-- Publish the versioned releases here -->
+        <repository>
+            <id>nexus</id>
+            <name>Nexus Release Repo</name>
+            <url>http://nexus.idmapps.nqbuild.lab/nexus/content/repositories/releases</url>
+        </repository>
+        <!-- Publish the versioned releases here -->
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Nexus Snapshot Repo</name>
+            <url>http://nexus.idmapps.nqbuild.lab/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!-- download artifacts from this repo -->
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Micro Focus Nexus Repo</name>
+            <url>http://nexus.idmapps.nqbuild.lab/nexus/content/repositories/snapshots</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!-- download plugins from this repo -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>Micro Focus Nexus Repo</name>
+            <url>http://nexus.idmapps.nqbuild.lab/nexus/content/repositories/snapshots</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
 </project>
