@@ -22,16 +22,9 @@
 
 package com.lespea.cef;
 
-//~--- non-JDK imports --------------------------------------------------------
-
-import com.lespea.cef.utils.StringUtils;
-
-//~--- JDK imports ------------------------------------------------------------
-
 import java.io.Serializable;
 
-
-//~--- classes ----------------------------------------------------------------
+import com.lespea.cef.utils.StringUtils;
 
 /**
  * Object that holds all the values of a CEF object.
@@ -53,7 +46,7 @@ public class CEF implements Serializable {
     /**
      * Guess as to how big the string will be
      */
-    private static final int FIELD_SIZE_GUESS = 50;
+    private static final int FIELD_SIZE_GUESS = 500;
 
     /**
      * The maximum value that a severity can be
@@ -114,7 +107,7 @@ public class CEF implements Serializable {
      *            two products may use the same device-vendor and device- product pair.
      * @param version
      *            part of the group of strings that uniquely identify the type of sending device. No
-     *            two products may use the same device-vendor and device- product pair.
+     *            two products may use the same device-vendor and device-product pair.
      * @param id
      *            a unique identifier per event-type. This can be a string or an integer. Signature
      *            ID identifies the type of event reported. In the intrusion detection system (IDS)
