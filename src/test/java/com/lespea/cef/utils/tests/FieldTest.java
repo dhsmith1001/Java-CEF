@@ -24,13 +24,12 @@ package com.lespea.cef.utils.tests;
 
 //~--- non-JDK imports --------------------------------------------------------
 
-import com.lespea.cef.InvalidField;
-import com.lespea.cef.utils.StringUtils;
-
-import junit.framework.Assert;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import com.lespea.cef.InvalidField;
+import com.lespea.cef.utils.StringUtils;
+import junit.framework.Assert;
 
 
 //~--- classes ----------------------------------------------------------------
@@ -117,7 +116,7 @@ public class FieldTest {
         expectedExceptions = InvalidField.class
     )
     public void testBadEscapeField( final String unquotedStr, final String quotedStr ) throws InvalidField {
-        StringUtils.escapeField( unquotedStr );
+        StringUtils.escapeField("unquotedStr", unquotedStr);
     }
 
 
@@ -133,7 +132,7 @@ public class FieldTest {
      */
     @Test(dataProvider = "normalFields")
     public void testFieldNormal( final String unquotedStr, final String quotedStr ) throws InvalidField {
-        Assert.assertEquals( quotedStr, StringUtils.escapeField( unquotedStr ) );
+        Assert.assertEquals( quotedStr, StringUtils.escapeField("unquotedStr", unquotedStr) );
     }
 
 
@@ -149,7 +148,7 @@ public class FieldTest {
      */
     @Test(dataProvider = "pipeFields")
     public void testFieldPipes( final String unquotedStr, final String quotedStr ) throws InvalidField {
-        Assert.assertEquals( quotedStr, StringUtils.escapeField( unquotedStr ) );
+        Assert.assertEquals( quotedStr, StringUtils.escapeField("unquotedStr", unquotedStr) );
     }
 
 
@@ -165,7 +164,7 @@ public class FieldTest {
      */
     @Test(dataProvider = "slashFields")
     public void testFieldSlash( final String unquotedStr, final String quotedStr ) throws InvalidField {
-        Assert.assertEquals( quotedStr, StringUtils.escapeField( unquotedStr ) );
+        Assert.assertEquals( quotedStr, StringUtils.escapeField("unquotedStr", unquotedStr) );
     }
 
 
@@ -181,7 +180,7 @@ public class FieldTest {
      */
     @Test(dataProvider = "slashPipeFields")
     public void testFieldSlashPipes( final String unquotedStr, final String quotedStr ) throws InvalidField {
-        Assert.assertEquals( quotedStr, StringUtils.escapeField( unquotedStr ) );
+        Assert.assertEquals( quotedStr, StringUtils.escapeField("unquotedStr", unquotedStr) );
     }
 
 
@@ -201,7 +200,7 @@ public class FieldTest {
         invocationCount = 50
     )
     public void testFieldSlashPipesThreads( final String unquotedStr, final String quotedStr ) throws InvalidField {
-        Assert.assertEquals( quotedStr, StringUtils.escapeField( unquotedStr ) );
+        Assert.assertEquals( quotedStr, StringUtils.escapeField("unquotedStr", unquotedStr) );
         Assert.assertTrue( StringUtils.isValidField( unquotedStr ) );
     }
 
@@ -224,7 +223,7 @@ public class FieldTest {
      */
     @Test
     public void testNullField() throws InvalidField {
-        Assert.assertNull( StringUtils.escapeField( null ) );
+        Assert.assertNull( StringUtils.escapeField("unknown", null) );
         Assert.assertFalse( StringUtils.isValidField( null ) );
     }
 

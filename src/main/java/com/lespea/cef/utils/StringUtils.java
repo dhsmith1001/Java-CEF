@@ -24,16 +24,16 @@ package com.lespea.cef.utils;
 
 //~--- non-JDK imports --------------------------------------------------------
 
-import com.lespea.cef.InvalidExtensionKey;
-import com.lespea.cef.InvalidField;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//~--- JDK imports ------------------------------------------------------------
+import com.lespea.cef.InvalidExtensionKey;
+import com.lespea.cef.InvalidField;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+//~--- JDK imports ------------------------------------------------------------
 
 
 //~--- classes ----------------------------------------------------------------
@@ -197,13 +197,14 @@ public final class StringUtils {
      * <p>
      * Null strings return null for now.
      *
+     * @param fieldName
      * @param fieldStr
      *            the text of the field that requires escaping
      * @return the escaped version of the field string
      * @throws InvalidField
      *             if the string to be escaped is invalid according to the CEF spec
      */
-    public static String escapeField( final String fieldStr ) throws InvalidField {
+    public static String escapeField(String fieldName, final String fieldStr) throws InvalidField {
         if (fieldStr == null) {
             StringUtils.LOG.warn( "Tried to escape a null CEF field" );
 
