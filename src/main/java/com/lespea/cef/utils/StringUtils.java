@@ -206,15 +206,13 @@ public final class StringUtils {
      */
     public static String escapeField(String fieldName, final String fieldStr) throws InvalidField {
         if (fieldStr == null) {
-            StringUtils.LOG.warn( "Tried to escape a null CEF field" );
-
+            StringUtils.LOG.warn( "Tried to escape a null CEF field: " + fieldName );
             return null;
         }
 
 
         if (StringUtils.INVALID_FIELD_PATTERN.matcher( fieldStr ).find()) {
             StringUtils.LOG.error( "The field string contained an invalid character" );
-
             throw new InvalidField( "The field string " + fieldStr + " contained an invalid character" );
         }
 
