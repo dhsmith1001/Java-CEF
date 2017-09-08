@@ -197,16 +197,15 @@ public final class StringUtils {
      * <p>
      * Null strings return null for now.
      *
-     * @param fieldName
-     * @param fieldStr
-     *            the text of the field that requires escaping
-     * @return the escaped version of the field string
-     * @throws InvalidField
-     *             if the string to be escaped is invalid according to the CEF spec
+     * @param fieldName Name of the field being escaped (for error logging purposes)
+     * @param fieldStr The text of the field that requires escaping
+     * @return The escaped version of the field string
+     * @throws InvalidField If the string to be escaped is invalid according to the CEF spec
      */
     public static String escapeField(String fieldName, final String fieldStr) throws InvalidField {
         if (fieldStr == null) {
-            StringUtils.LOG.warn( "Tried to escape a null CEF field: " + fieldName );
+            Exception e = new Exception("Null Field");
+            StringUtils.LOG.warn( "Tried to escape a null CEF field: " + fieldName, e );
             return null;
         }
 
