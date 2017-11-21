@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.lespea</groupId>
     <artifactId>cef</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>common-event-format</name>
     <description>Library to work with the common event format</description>
     <properties>

@@ -185,9 +185,6 @@ public final class StringUtils {
     }
 
 
-    // TODO: Investigate using String.getBytes(“UTF-8″) to coerce the string
-    // into UTF-8 (not-super important atm since I probably don't even have to do this)
-
     /**
      * Every field in a CEF string (minus the extension) must escape the bar <code>("|")</code>
      * character as well as the backslash <code>("\")</code>.
@@ -204,9 +201,8 @@ public final class StringUtils {
      */
     public static String escapeField(String fieldName, final String fieldStr) throws InvalidField {
         if (fieldStr == null) {
-            Exception e = new Exception("Null Field");
-            StringUtils.LOG.warn( "Tried to escape a null CEF field: " + fieldName, e );
-            return null;
+            throw new InvalidField("Null value passed to " + StringUtils.class.getName() +
+                    ".escapeField(), field name: " + fieldName);
         }
 
 

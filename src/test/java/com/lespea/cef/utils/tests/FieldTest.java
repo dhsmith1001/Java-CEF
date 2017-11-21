@@ -223,7 +223,11 @@ public class FieldTest {
      */
     @Test
     public void testNullField() throws InvalidField {
-        Assert.assertNull( StringUtils.escapeField("unknown", null) );
+        try {
+            Assert.assertNull( StringUtils.escapeField("UnitTestField", null) );
+        } catch (InvalidField invalidField) {
+            // this is OK in this instance, a null value should cause an exception
+        }
         Assert.assertFalse( StringUtils.isValidField( null ) );
     }
 

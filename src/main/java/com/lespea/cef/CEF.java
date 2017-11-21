@@ -1,23 +1,22 @@
 /**
  * CEF.java    2011-09-07
- *
+ * <p>
  * Copyright 2011, Adam Lesperance
- *
+ * <p>
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation; either version 2.1 of the License, or (at your option)
  * any later version.
- *
+ * <p>
  * This library is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
+ * <p>
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-
 
 
 package com.lespea.cef;
@@ -30,16 +29,18 @@ import com.lespea.cef.utils.StringUtils;
  * Object that holds all the values of a CEF object.
  * <p>
  * This object is immutable and once created no changes can be made!
- *
+ * </p>
  * @version 1.0, 2011-09-07
  * @author Adam Lesperance
  */
-public class CEF implements Serializable {
+public class CEF implements Serializable
+{
 
     /**
      * The default CEF version that is used while creating a CEF object. This should always be used!
      * <p>
      * <code>0</code>
+     * </p>
      */
     public static final int DEFAULT_CEF_VERSION = 0;
 
@@ -132,10 +133,11 @@ public class CEF implements Serializable {
      * @see <a href="http://www.arcsight.com/collateral/CEFstandards.pdf">PDF for the CEF
      *      standard</a>
      */
-    public CEF( final String vendor, final String product, final String version, final int id, final String name,
-                final int severity, final Extension extension )
-            throws InvalidField {
-        this( vendor, product, version, Integer.toString( id ), name, severity, extension );
+    public CEF(final String vendor, final String product, final String version, final int id, final String name,
+               final int severity, final Extension extension)
+            throws InvalidField
+    {
+        this(vendor, product, version, Integer.toString(id), name, severity, extension);
     }
 
 
@@ -175,10 +177,11 @@ public class CEF implements Serializable {
      * @see <a href="http://www.arcsight.com/collateral/CEFstandards.pdf">PDF for the CEF
      *      standard</a>
      */
-    public CEF( final String vendor, final String product, final String version, final String id, final String name,
-                final int severity, final Extension extension )
-            throws InvalidField {
-        this( CEF.DEFAULT_CEF_VERSION, vendor, product, version, id, name, severity, extension );
+    public CEF(final String vendor, final String product, final String version, final String id, final String name,
+               final int severity, final Extension extension)
+            throws InvalidField
+    {
+        this(CEF.DEFAULT_CEF_VERSION, vendor, product, version, id, name, severity, extension);
     }
 
 
@@ -225,18 +228,9 @@ public class CEF implements Serializable {
      * @see <a href="http://www.arcsight.com/collateral/CEFstandards.pdf">PDF for the CEF
      *      standard</a>
      */
-    public CEF( final int cefVersion, final String vendor, final String product, final String version, final String id,
-                final String name, final int severity, final Extension extension )
-            throws InvalidField {
-        this.cefVersion = cefVersion;
-        this.vendor     = vendor;
-        this.product    = product;
-        this.version    = version;
-        this.id         = id;
-        this.name       = name;
-        this.severity   = severity;
-        this.extension  = extension;
-
+    public CEF(final int cefVersion, final String vendor, final String product, final String version, final String id,
+               final String name, final int severity, final Extension extension) throws InvalidField
+    {
         assert vendor != null : "The vendor cannot be null";
         assert product != null : "The product cannot be null";
         assert version != null : "The version cannot be null";
@@ -244,28 +238,34 @@ public class CEF implements Serializable {
         assert name != null : "The name cannot be null";
         assert extension != null : "The extension cannot be null";
         assert ((severity >= CEF.MIN_SEVERITY) && (severity <= CEF.MAX_SEVERITY)) :
-               "The severity must be between 0 and 10";
+                "The severity must be between 0 and 10";
 
-        final StringBuilder sb = new StringBuilder( CEF.FIELD_SIZE_GUESS + extension.toString().length() );
+        this.cefVersion = cefVersion;
+        this.vendor = vendor;
+        this.product = product;
+        this.version = version;
+        this.id = id;
+        this.name = name;
+        this.severity = severity;
+        this.extension = extension;
 
-        sb.append( "CEF:" );
-        sb.append( cefVersion );
-        sb.append( "|" );
-        sb.append( StringUtils.escapeField("vendor", vendor) );
-        sb.append( "|" );
-        sb.append( StringUtils.escapeField("product", product) );
-        sb.append( "|" );
-        sb.append( StringUtils.escapeField("version", version) );
-        sb.append( "|" );
-        sb.append( StringUtils.escapeField("id", id) );
-        sb.append( "|" );
-        sb.append( StringUtils.escapeField("name", name) );
-        sb.append( "|" );
-        sb.append( severity );
-        sb.append( "|" );
-        sb.append( extension );
+        asString = "CEF:" +
+                cefVersion +
+                "|" +
+                StringUtils.escapeField("vendor", vendor) +
+                "|" +
+                StringUtils.escapeField("product", product) +
+                "|" +
+                StringUtils.escapeField("version", version) +
+                "|" +
+                StringUtils.escapeField("id", id) +
+                "|" +
+                StringUtils.escapeField("name", name) +
+                "|" +
+                severity +
+                "|" +
+                extension;
 
-        asString = sb.toString();
         hashCode = asString.hashCode();
     }
 
@@ -273,7 +273,8 @@ public class CEF implements Serializable {
     //~--- methods ------------------------------------------------------------
 
     @Override
-    public boolean equals( final Object obj ) {
+    public boolean equals(final Object obj)
+    {
         if (this == obj) {
             return true;
         }
@@ -290,25 +291,25 @@ public class CEF implements Serializable {
         if (cefVersion != other.getCefVersion()) {
             return false;
         }
-        else if (!id.equals( other.getId() )) {
+        else if (!id.equals(other.getId())) {
             return false;
         }
-        else if (!name.equals( other.getName() )) {
+        else if (!name.equals(other.getName())) {
             return false;
         }
-        else if (!product.equals( other.getProduct() )) {
+        else if (!product.equals(other.getProduct())) {
             return false;
         }
         else if (severity != other.getSeverity()) {
             return false;
         }
-        else if (!vendor.equals( other.getVendor() )) {
+        else if (!vendor.equals(other.getVendor())) {
             return false;
         }
-        else if (!version.equals( other.getVersion() )) {
+        else if (!version.equals(other.getVersion())) {
             return false;
         }
-        else if (!extension.equals( other.getExtension() )) {
+        else if (!extension.equals(other.getExtension())) {
             return false;
         }
 
@@ -318,13 +319,15 @@ public class CEF implements Serializable {
 
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return hashCode;
     }
 
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return asString;
     }
 
@@ -334,7 +337,8 @@ public class CEF implements Serializable {
     /**
      * @return the cefVersion
      */
-    public int getCefVersion() {
+    public int getCefVersion()
+    {
         return cefVersion;
     }
 
@@ -342,7 +346,8 @@ public class CEF implements Serializable {
     /**
      * @return the extension
      */
-    public Extension getExtension() {
+    public Extension getExtension()
+    {
         return extension;
     }
 
@@ -350,7 +355,8 @@ public class CEF implements Serializable {
     /**
      * @return the id
      */
-    public String getId() {
+    public String getId()
+    {
         return id;
     }
 
@@ -358,7 +364,8 @@ public class CEF implements Serializable {
     /**
      * @return the name
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -366,7 +373,8 @@ public class CEF implements Serializable {
     /**
      * @return the product
      */
-    public String getProduct() {
+    public String getProduct()
+    {
         return product;
     }
 
@@ -374,7 +382,8 @@ public class CEF implements Serializable {
     /**
      * @return the severity
      */
-    public int getSeverity() {
+    public int getSeverity()
+    {
         return severity;
     }
 
@@ -382,7 +391,8 @@ public class CEF implements Serializable {
     /**
      * @return the vendor
      */
-    public String getVendor() {
+    public String getVendor()
+    {
         return vendor;
     }
 
@@ -390,7 +400,8 @@ public class CEF implements Serializable {
     /**
      * @return the version
      */
-    public String getVersion() {
+    public String getVersion()
+    {
         return version;
     }
 }
